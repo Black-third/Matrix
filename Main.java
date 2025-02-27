@@ -1,5 +1,18 @@
 import java.util.*;
 
+
+
+// File: Main.java
+// Author: Husam Abdelhady Zaid
+// ID: 20230589
+// Section: S3,S4
+// Date: 27 Feb 2025
+// Task: Assignment 1 part 1 task 1
+// This Java program defines a Matrix class that provides various matrix operations such as
+// addition, multiplication, transposition, exponentiation, inversion, solving linear equations,
+// computing the trace, and calculating the determinant.
+
+
 // Class representing a matrix with various operations
 class Matrix {
     double[][] a; // 2D array to store matrix elements
@@ -9,14 +22,14 @@ class Matrix {
     Matrix(int x, int y) {
         n = x;
         m = y;
-        a = new double[n][m]; // Allocate memory for the matrix
+        a = new double[n][m]; 
     }
 
     // Method to read matrix elements from a Scanner input
     void r(Scanner s) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                a[i][j] = s.nextDouble(); // Read each element
+                a[i][j] = s.nextDouble(); 
             }
         }
     }
@@ -25,9 +38,9 @@ class Matrix {
     void p() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                System.out.print(a[i][j] + " "); // Print each element
+                System.out.print(a[i][j] + " "); 
             }
-            System.out.println(); // Move to the next line after each row
+            System.out.println(); 
         }
     }
 
@@ -56,7 +69,7 @@ class Matrix {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < o.m; j++) {
                 for (int k = 0; k < m; k++) {
-                    r.a[i][j] += a[i][k] * o.a[k][j]; // Perform matrix multiplication
+                    r.a[i][j] += a[i][k] * o.a[k][j]; 
                 }
             }
         }
@@ -138,24 +151,6 @@ class Matrix {
             return;
         }
         double[][] aug = new double[n][n + 1];
-        // Ensuring solve is correct
-        Matrix a1 = new Matrix(m, n);
-        Matrix a2 = new Matrix(n, m);
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                a1.a[i][j] = a[j][i];
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                a2.a[i][j] = a1.a[j][i];
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                a[i][j] = a2.a[i][j];
-            }
-        }
         for (int i = 0; i < n; i++) {
             System.arraycopy(a[i], 0, aug[i], 0, n);
             aug[i][n] = b[i];
@@ -225,7 +220,9 @@ class Matrix {
     int rank() {
         int rank = 0;
         Matrix temp = new Matrix(n, m);
-        for (int i = 0; i < n; i++) temp.a[i] = Arrays.copyOf(a[i], m);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) temp.a[i][j] = a[i][j];
+        }
         for (int i = 0; i < m; i++) {
             int k = rank;
             while (k < n && temp.a[k][i] == 0) k++;
@@ -261,7 +258,8 @@ class FibonacciMatrix {
         return result;
     }
 
-    // Method to raise a 2x2 matrix to a given power
+    // Method to raise a 2x2 matrix to a given power 
+    //Fast Power
     private static long[][] matrixPower(long[][] A, int n) {
         long[][] result = {{1, 0}, {0, 1}}; // Initialize result as identity matrix
         while (n > 0) {
@@ -269,7 +267,7 @@ class FibonacciMatrix {
                 result = multiply(result, A); // Multiply if power is odd
             }
             A = multiply(A, A); // Square the matrix
-            n /= 2; // Halve the power
+            n /= 2; //halve the power
         }
         return result;
     }
@@ -285,7 +283,7 @@ class FibonacciMatrix {
     }
 }
 
-// Main class to test the matrix operations
+
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
